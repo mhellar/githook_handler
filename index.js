@@ -7,7 +7,7 @@ github.listen();
 github.on('*', function(event, repo, ref, data) {});
 
 github.on('push', function(event, repo, ref, data) {
-    console.log(req.body.pusher.name + ' just pushed to ' + data.repository.full_name);
+    console.log(data.pusher.name + ' just pushed to ' + data.repository.full_name);
 
     console.log('pulling code from GitHub...');
 
