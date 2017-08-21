@@ -22,9 +22,6 @@ github.on('push', function(event, repo, ref, data) {
 
     // and npm install with --production
     exec('npm -C ~/githook_handler install --production', execCallback);
-
-    // and run tsc
-    exec('tsc', execCallback);
 });
 
 github.on('event', function(repo, ref, data) {});
