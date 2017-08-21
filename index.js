@@ -44,3 +44,7 @@ github.on('type', function(event, data) {});
 
 // if you'd like to programmatically stop listening
 // github.stop();
+function execCallback(err, stdout, stderr) {
+    if (stdout) console.log(stdout);
+    if (stderr) console.log(stderr);
+}
