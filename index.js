@@ -1,30 +1,24 @@
-var http = require('http')
-var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/webhook', secret: 'jimbob' })
+var githubhook = require('githubhook');
+var github = githubhook({ /* options */ });
 
-http.createServer(function(req, res) {
-    handler(req, res, function(err) {
-        res.statusCode = 404
-        res.end('no such location')
-    })
-}).listen(7777)
+github.listen();
 
-handler.on('error', function(err) {
-    console.error('Error:', err.message)
-})
+github.on('*', function(event, repo, ref, data) {});
 
-handler.on('push', function(event) {
-    console.log('Received a push event for %s to %s',
-        event.payload.repository.name,
-        event.payload.ref)
-})
+github.on('event', function(repo, ref, data) {});
 
-handler.on('issues', function(event) {
-    console.log('Received an issue event for %s action=%s: #%d %s',
-        event.payload.repository.name,
-        event.payload.action,
-        event.payload.issue.number,
-        event.payload.issue.title)
-})
+github.on('event:reponame', function(ref, data) {});
 
-//test
+github.on('event:reponame:ref', function(data) {});
+
+github.on('reponame', function(event, ref, data) {});
+
+github.on('reponame:ref', function(event, data) {});
+
+// GitLab system hooks
+github.on('*', function(event, type, data) {});
+
+github.on('type', function(event, data) {});
+
+// if you'd like to programmatically stop listening
+// github.stop();
